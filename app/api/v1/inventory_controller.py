@@ -6,13 +6,14 @@ from app.services.inventario_service import UserInventoryService, provide_invent
 from app.models.item import Item
 from app.models.inventario import UserInventory
 from app.models.schemas import ItemResponse
+from collections.abc import Sequence
 
 class ItemController(Controller):
     path = "/items"
     dependencies = {"service": Provide(provide_item_service)}
 
     @get()
-    async def get_items(self, service: ItemService) -> list[Item]:
+    async def get_items(self, service: ItemService) -> Sequence[Item]:
         return await service.list()
 
     @post()
@@ -35,7 +36,7 @@ class UserInventoryController(Controller):
     dependencies = {"service": Provide(provide_inventory_service)}
 
     @get("/{user_id:int}")
-    async def get_inventory(self, service: UserInventoryService, user_id: int) -> list[UserInventory]:
+    async def get_inventory(self, service: UserInventoryService, user_id: int) -> Sequence[UserInventory]:
         return await service.list(user_id=user_id)
 
     @post()
