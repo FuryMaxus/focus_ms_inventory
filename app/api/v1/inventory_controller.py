@@ -20,6 +20,13 @@ class ItemController(Controller):
     @delete("/{item_id:int}")
     async def delete_item(self, service: ItemService, item_id: int) -> None:
         await service.delete(item_id)
+    from app.models.schemas import ItemResponse
+
+    @get("/random")
+    async def get_random_item(self, service: ItemService) -> ItemResponse:
+        items = await service.list()
+        item = random.choice(items)
+        return ItemResponse(id=item.id, nombre=item.nombre)
 
 
 class InventarioController(Controller):
