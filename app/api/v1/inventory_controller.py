@@ -7,6 +7,7 @@ from app.models.item import Item
 from app.models.inventario import UserInventory
 from app.models.schemas import ItemResponse
 from collections.abc import Sequence
+from app.models.schemas import ItemResponse, ItemCreate
 
 class ItemController(Controller):
     path = "/items"
@@ -17,8 +18,15 @@ class ItemController(Controller):
         return await service.list()
 
     @post()
-    async def create_item(self, service: ItemService, data: Item) -> Item:
-        return await service.create(data)
+    async def create_item(self, service: ItemService, data: ItemCreate) -> ItemResponse:
+        item = await service.create(Item(
+            name=data.name,
+            description=data.description,
+            rarity=data.rarity,
+            item_type=data.item_type,
+            asset_url=data.asset_url
+        ))
+        return ItemResponse(id=item.id, name=item.name, rarity=item.rarity, item_type=item.item_type)
 
     @delete("/{item_id:int}")
     async def delete_item(self, service: ItemService, item_id: int) -> None:
