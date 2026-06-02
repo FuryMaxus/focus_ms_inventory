@@ -2,4 +2,6 @@ import msgspec
 
 class ItemResponse(msgspec.Struct):
     id: int
-    nombre: str
+    name: str
+    rarity: str
+    item_type: str

@@ -1,9 +1,9 @@
 from advanced_alchemy.service import SQLAlchemyAsyncRepositoryService
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.repositories.inventario_repository import InventarioRepository
+from app.repositories.inventario_repository import UserInventoryRepository
 
-class InventarioService(SQLAlchemyAsyncRepositoryService):
-    repository_type = InventarioRepository
+class UserInventoryService(SQLAlchemyAsyncRepositoryService):
+    repository_type = UserInventoryRepository
 
-async def provide_inventario_service(db_session: AsyncSession) -> InventarioService:
-    return InventarioService(session=db_session)
+async def provide_inventory_service(db_session: AsyncSession) -> UserInventoryService:
+    return UserInventoryService(session=db_session)

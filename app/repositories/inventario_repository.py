@@ -1,5 +1,5 @@
 from advanced_alchemy.repository import SQLAlchemyAsyncRepository
-from app.models.inventario import Inventario
+from app.models.inventario import UserInventory
 
-class InventarioRepository(SQLAlchemyAsyncRepository):
-    model_type = Inventario
+class UserInventoryRepository(SQLAlchemyAsyncRepository):
+    model_type = UserInventory

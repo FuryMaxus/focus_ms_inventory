@@ -1,6 +1,6 @@
 from litestar import Litestar
 from litestar.plugins.sqlalchemy import SQLAlchemyAsyncConfig, SQLAlchemyPlugin
-from app.api.v1.inventory_controller import ItemController, InventarioController
+from app.api.v1.inventory_controller import ItemController, UserInventoryController
 from app.core.config import DATABASE_URL
 
 db_config = SQLAlchemyAsyncConfig(
@@ -9,6 +9,6 @@ db_config = SQLAlchemyAsyncConfig(
 )
 
 app = Litestar(
-    route_handlers=[ItemController, InventarioController],
+    route_handlers=[ItemController, UserInventoryController],
     plugins=[SQLAlchemyPlugin(db_config)],
 )

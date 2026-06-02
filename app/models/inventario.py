@@ -1,11 +1,10 @@
 from advanced_alchemy.mixins.bigint import BigIntPrimaryKey
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import ForeignKey, TIMESTAMP
-from datetime import datetime
+from sqlalchemy import ForeignKey, Boolean
 
-class Inventario(BigIntPrimaryKey):
-    __tablename__ = "inventario"
+class UserInventory(BigIntPrimaryKey):
+    __tablename__ = "user_inventory"
 
-    id_personaje: Mapped[int] = mapped_column(ForeignKey("personaje.id_personaje"))
-    id_item: Mapped[int] = mapped_column(ForeignKey("item.id_item"))
-    obtenido_en: Mapped[datetime] = mapped_column(TIMESTAMP, default=datetime.utcnow)
+    user_id: Mapped[int] = mapped_column(nullable=False, index=True)
+    item_id: Mapped[int] = mapped_column(ForeignKey("items.id"), nullable=False)
+    is_equipped: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
