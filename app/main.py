@@ -1,6 +1,7 @@
 from litestar import Litestar
 from litestar.plugins.sqlalchemy import SQLAlchemyAsyncConfig, SQLAlchemyPlugin
-from app.api.v1.inventory_controller import ItemController, UserInventoryController
+from app.api.v1.inventory_controller import UserInventoryController
+from app.api.v1.item_controller import ItemController
 from app.core.config import DATABASE_URL
 from app.core.security import jwt_auth
 
