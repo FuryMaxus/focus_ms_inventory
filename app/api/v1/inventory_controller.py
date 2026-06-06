@@ -1,7 +1,7 @@
 from uuid import UUID
 from litestar import Controller, get, post, delete
 from litestar.di import Provide
-from app.services.inventario_service import UserInventoryService, provide_inventory_service
+from app.services.inventory_service import UserInventoryService, provide_inventory_service
 from app.models.inventario import UserInventory
 from app.domain.structs import UserInventoryResponse, InventoryAddPayload
 
