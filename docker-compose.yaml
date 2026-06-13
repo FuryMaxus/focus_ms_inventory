@@ -1,0 +1,32 @@
+services:
+  inventory_db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: inventory_password
+      POSTGRES_DB: focus_inventory_db
+    ports:
+      - "5436:5432"
+    volumes:
+      - inventory_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d focus_inventory_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  inventory_ms:
+    build:
+      context: .
+    ports:
+      - "8003:8003"
+    environment:
+      - PORT=8003
+      - DATABASE_URL=postgresql+asyncpg://user:inventory_password@inventory_db:5432/focus_inventory_db
+      - SECRET_KEY=clave_super_secreta
+    depends_on:
+      inventory_db:
+        condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+volumes:
+  inventory_data:
