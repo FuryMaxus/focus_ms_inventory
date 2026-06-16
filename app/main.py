@@ -5,10 +5,15 @@ from app.api.v1.item_controller import ItemController
 from app.core.config import DATABASE_URL
 from app.core.security import jwt_auth
 from app.core.exceptions import GLOBAL_EXCEPTION_HANDLERS
+from app.models.base import Base
+from app.models.user_inventory import UserInventoryModel
+from app.models.inventario import UserInventory
+from app.models.item import Item
 
 db_config = SQLAlchemyAsyncConfig(
     connection_string=DATABASE_URL,
     create_all=True,
+    metadata=Base.metadata
 )
 
 api_v1_router = Router(
