@@ -2,7 +2,7 @@ from uuid import UUID
 from litestar import Controller, get, post, delete
 from litestar.di import Provide
 from app.services.inventory_service import UserInventoryService, provide_inventory_service
-from app.models.inventario import UserInventory
+from app.models.user_inventory import UserInventoryModel 
 from app.domain.structs import UserInventoryResponse, InventoryAddPayload
 
 class UserInventoryController(Controller):
@@ -20,7 +20,7 @@ class UserInventoryController(Controller):
     
     @post()
     async def add_item(self, service: UserInventoryService, data: InventoryAddPayload) -> UserInventoryResponse:
-        new_inv = await service.create(UserInventory(
+        new_inv = await service.create(UserInventoryModel(  
             user_id=data.user_id,
             item_id=data.item_id,
             is_equipped=data.is_equipped
