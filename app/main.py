@@ -7,7 +7,6 @@ from app.core.security import jwt_auth
 from app.core.exceptions import GLOBAL_EXCEPTION_HANDLERS
 from app.models.base import Base
 from app.models.user_inventory import UserInventoryModel
-from app.models.inventario import UserInventory
 from app.models.item import Item
 
 db_config = SQLAlchemyAsyncConfig(
